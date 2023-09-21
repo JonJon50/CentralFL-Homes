@@ -1,13 +1,16 @@
-<!-- landing.blade.php -->
+<!-- landing.blade.php John Hagens-->
 
 <!DOCTYPE html>
 <html lang="en">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="description" content="ICI Homes offers a range of real estate services, featuring profiles of our experienced employees and a collection of our high-quality homes available for sale.">
+    <meta name="keywords" content="ICI Homes, Real Estate, Property, Quality Homes, Employee Profiles, Homes for Sale, Real Estate Services, Home Design">
     <title>ICI Homes Landing Page</title>
     <link rel="stylesheet" href="{{ asset('css/app.css') }}"> <!-- Include your CSS file -->
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
+    <link href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css" rel="stylesheet">
 
 </head>
 <body>
@@ -16,7 +19,7 @@
             <source src="video/ICI Homes.mp4" type="video/mp4"> <!-- Replace with your video source -->
         </video>
         <div class="text-overlay">
-            <div id="text-fade" x-data="{ fadeIn: true }" x-init="setTimeout(() => { fadeIn = false }, 15000)" x-init="fontSize = window.innerWidth > 768 ? '24px' : '18px'"> <!-- Start with fadeIn true and then set it to false after 15000ms (15 seconds) -->
+          <div id="text-fade" x-data="{ fadeIn: true, fontSize: '18px' }" x-cloak x-init="setTimeout(() => { fadeIn = false }, 15000); fontSize = window.innerWidth > 768 ? '24px' : '18px';"> <!-- Start with fadeIn true and then set it to false after 15000ms (15 seconds) -->
                 <span>Welcome to</span>
                 <span>ICI</span>
                 <span>Homes <i class="fas fa-home"></i></span>
@@ -66,7 +69,8 @@
         <div class="employee-row">
             <div class="employee">
                 <a href="https://www.linkedin.com/in/samuel-morrisett-88059a24/" target="_blank" rel="noopener noreferrer">
-                    <img src="{{ asset('images/employees/dp.jpeg') }}" alt="Samuel Morrisett">
+                <img src="{{ asset('images/employees/dp.jpeg') }}" alt="Samuel Morrisett" loading="lazy">
+
                     <p>Samuel Morrisett<br>Division President ICI Homes | Process Improvement, CRM</p>
                 </a>
             </div>
@@ -83,10 +87,50 @@
     </div>
 </section>
 
+<!-- Carousel Section -->
+<section id="carousel-section" class="carousel-section">
+    <div class="container">
+        <h2 class="text-center">Some of ICI Homes work</h2>
+        <div id="houseCarousel" class="carousel slide carousel-border" data-ride="carousel">
+            <div class="carousel-inner">
+                <div class="carousel-item active">
+                    <img src="{{ asset('images/houses/ici1.jpeg') }}" class="d-block w-100" alt="House 1">
+                </div>
+                <div class="carousel-item">
+                    <img src="{{ asset('images/houses/ici2.jpeg') }}" class="d-block w-100" alt="House 2">
+                </div>
+                <div class="carousel-item">
+                    <img src="{{ asset('images/houses/ici3.jpeg') }}" class="d-block w-100" alt="House 3">
+                </div>
+                <div class="carousel-item">
+                    <img src="{{ asset('images/houses/ici4.jpeg') }}" class="d-block w-100" alt="House 4">
+                </div>
+                <div class="carousel-item">
+                    <img src="{{ asset('images/houses/ici5.jpeg') }}" class="d-block w-100" alt="House 5">
+                </div>
+            </div>
+            <a class="carousel-control-prev" href="#houseCarousel" role="button" data-slide="prev">
+                <span class="carousel-control-prev-icon" aria-hidden="true"></span>
+                <span class="sr-only">Previous</span>
+            </a>
+            <a class="carousel-control-next" href="#houseCarousel" role="button" data-slide="next">
+                <span class="carousel-control-next-icon" aria-hidden="true"></span>
+                <span class="sr-only">Next</span>
+            </a>
+        </div>
+        <p class="text-center mt-3 visit-us">
+            <a href="https://icihomes.com" target="_blank">Come Visit Us HERE</a>
+        </p>
+    </div>
+</section>
 
-    <script src="https://cdn.jsdelivr.net/npm/alpinejs@2.8.2/dist/alpine.js" defer></script>
-    <script src="{{ asset('js/app.js') }}"></script>
-    <!-- Add more sections for the middle and bottom content -->
+        <script src="{{ asset('js/app.js') }}"></script>
+        <script defer src="https://cdn.jsdelivr.net/npm/alpinejs@3.13.0/dist/cdn.min.js"></script>
+
+    
+<script src="https://code.jquery.com/jquery-3.3.1.slim.min.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.7/umd/popper.min.js"></script>
+<script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/js/bootstrap.min.js"></script>
 
 </body>
 </html>

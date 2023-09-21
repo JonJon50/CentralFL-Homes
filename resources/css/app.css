@@ -1,10 +1,11 @@
-/* Reset default margin and padding */
-body, html {
+/* John Hagens */
+body,
+html {
     margin: 0;
     padding: 0;
 }
 
-/* Style the video section */
+
 .video-section {
     position: relative;
     width: 100%;
@@ -18,7 +19,7 @@ video {
     height: 100%;
 }
 
-/* Style the text overlay */
+
 .text-overlay {
     position: absolute;
     top: 0;
@@ -28,7 +29,8 @@ video {
     display: flex;
     justify-content: center;
     align-items: center;
-    background: rgba(0, 0, 0, 0.5); /* Add a semi-transparent background */
+    background: rgba(0, 0, 0, 0.5);
+   
 }
 
 #text-fade {
@@ -37,18 +39,38 @@ video {
     text-align: center;
 }
 
-/* Add additional styling as needed */
-/* Add to your CSS file */
+
 .employee-section {
     text-align: center;
     padding: 50px 0;
-    background-color: #f4f4f4; /* A light gray background to distinguish the section */
+    background-color: #dcce2d;
+}
+
+.container {
+    max-width: 1200px;
+    margin: 0 auto;
+}
+
+.employee-row {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    flex-wrap: wrap;
+    margin-bottom: 20px;
 }
 
 .employee {
-    display: inline-block;
-    margin: 0 20px;
+    flex: 0 0 auto;
     padding: 20px;
+}
+
+.employee a {
+    text-decoration: none;
+    color: black;
+}
+
+.employee a:hover {
+    color: gray;
 }
 
 .employee img {
@@ -56,4 +78,75 @@ video {
     height: 150px;
     border-radius: 50%;
     margin-bottom: 10px;
+}
+
+@media (max-width: 991px) {
+    .employee-row {
+        justify-content: center;
+    }
+}
+
+.employee a {
+    text-decoration: none;
+    
+    color: black;    
+}
+
+.employee a:hover {
+    color: rgb(249, 249, 249);
+}
+
+
+.contact-us {
+    flex: 0 0 auto;
+    padding: 20px;
+}
+
+.contact-us a {
+    text-decoration: none;
+    color: white;
+    font-size: 50px;
+    font-weight: bold;
+  
+}
+
+.contact-us a:hover {
+    color: black;
+}
+
+.carousel-section {
+    padding: 40px 0;
+}
+
+.carousel-section h2 {
+    font-size: 2rem;
+    margin-bottom: 20px;
+}
+
+.carousel-section p a {
+    color: #030202;
+    text-decoration: none;
+}
+
+.carousel-section p a:hover {
+    text-decoration: underline;
+}
+
+.carousel-inner img {
+    width: 100%;
+    height: auto;
+}
+
+
+.visit-us a {
+    color: red;
+}
+
+.visit-us a:hover {
+    color: rgb(191, 188, 35);
+}
+
+.carousel-border {
+    border: 2px solid black;
+    box-shadow: 0px 0px 10px 2px rgba(0, 0, 0, 0.1);
 }

@@ -1,10 +1,11 @@
-/* Reset default margin and padding */
-body, html {
+/* John Hagens */
+body,
+html {
     margin: 0;
     padding: 0;
 }
 
-/* Style the video section */
+
 .video-section {
     position: relative;
     width: 100%;
@@ -18,7 +19,7 @@ video {
     height: 100%;
 }
 
-/* Style the text overlay */
+
 .text-overlay {
     position: absolute;
     top: 0;
@@ -28,7 +29,8 @@ video {
     display: flex;
     justify-content: center;
     align-items: center;
-    background: rgba(0, 0, 0, 0.5); /* Add a semi-transparent background */
+    background: rgba(0, 0, 0, 0.5);
+   
 }
 
 #text-fade {
@@ -37,9 +39,7 @@ video {
     text-align: center;
 }
 
-/* Add additional styling as needed */
-/* Add to your CSS file */
-/* Add to your CSS file */
+
 .employee-section {
     text-align: center;
     padding: 50px 0;
@@ -65,12 +65,12 @@ video {
 }
 
 .employee a {
-    text-decoration: none; /* Removes the underline */
-    color: black; /* Sets the text color to black */
+    text-decoration: none;
+    color: black;
 }
 
 .employee a:hover {
-    color: gray; /* Sets the text color to gray on hover */
+    color: gray;
 }
 
 .employee img {
@@ -86,18 +86,16 @@ video {
     }
 }
 
-/* Your existing styles */
-/* ... */
-
 .employee a {
-    text-decoration: none; /* Removes the underline from the links */
-    color: black; /* Sets the color of the text to black */
+    text-decoration: none;
+    
+    color: black;    
 }
 
 .employee a:hover {
-    color: rgb(249, 249, 249); /* Changes the color of the text to gray when hovered over */
+    color: rgb(249, 249, 249);
 }
-/* ... Other styles ... */
+
 
 .contact-us {
     flex: 0 0 auto;
@@ -106,11 +104,49 @@ video {
 
 .contact-us a {
     text-decoration: none;
-    color: white; /* White color as default */
-    font-size: 50px; /* Optional: Adjust the font size if needed */
-    font-weight: bold; /* Optional: Make the text bold */
+    color: white;
+    font-size: 50px;
+    font-weight: bold;
+  
 }
 
 .contact-us a:hover {
-    color: black; /* Black color on hover */
+    color: black;
+}
+
+.carousel-section {
+    padding: 40px 0;
+}
+
+.carousel-section h2 {
+    font-size: 2rem;
+    margin-bottom: 20px;
+}
+
+.carousel-section p a {
+    color: #030202;
+    text-decoration: none;
+}
+
+.carousel-section p a:hover {
+    text-decoration: underline;
+}
+
+.carousel-inner img {
+    width: 100%;
+    height: auto;
+}
+
+
+.visit-us a {
+    color: red;
+}
+
+.visit-us a:hover {
+    color: rgb(191, 188, 35);
+}
+
+.carousel-border {
+    border: 2px solid black;
+    box-shadow: 0px 0px 10px 2px rgba(0, 0, 0, 0.1);
 }
