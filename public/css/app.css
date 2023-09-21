@@ -38,3 +38,79 @@ video {
 }
 
 /* Add additional styling as needed */
+/* Add to your CSS file */
+/* Add to your CSS file */
+.employee-section {
+    text-align: center;
+    padding: 50px 0;
+    background-color: #dcce2d;
+}
+
+.container {
+    max-width: 1200px;
+    margin: 0 auto;
+}
+
+.employee-row {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    flex-wrap: wrap;
+    margin-bottom: 20px;
+}
+
+.employee {
+    flex: 0 0 auto;
+    padding: 20px;
+}
+
+.employee a {
+    text-decoration: none; /* Removes the underline */
+    color: black; /* Sets the text color to black */
+}
+
+.employee a:hover {
+    color: gray; /* Sets the text color to gray on hover */
+}
+
+.employee img {
+    width: 150px;
+    height: 150px;
+    border-radius: 50%;
+    margin-bottom: 10px;
+}
+
+@media (max-width: 991px) {
+    .employee-row {
+        justify-content: center;
+    }
+}
+
+/* Your existing styles */
+/* ... */
+
+.employee a {
+    text-decoration: none; /* Removes the underline from the links */
+    color: black; /* Sets the color of the text to black */
+}
+
+.employee a:hover {
+    color: rgb(249, 249, 249); /* Changes the color of the text to gray when hovered over */
+}
+/* ... Other styles ... */
+
+.contact-us {
+    flex: 0 0 auto;
+    padding: 20px;
+}
+
+.contact-us a {
+    text-decoration: none;
+    color: white; /* White color as default */
+    font-size: 50px; /* Optional: Adjust the font size if needed */
+    font-weight: bold; /* Optional: Make the text bold */
+}
+
+.contact-us a:hover {
+    color: black; /* Black color on hover */
+}

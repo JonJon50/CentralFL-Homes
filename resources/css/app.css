@@ -38,3 +38,22 @@ video {
 }
 
 /* Add additional styling as needed */
+/* Add to your CSS file */
+.employee-section {
+    text-align: center;
+    padding: 50px 0;
+    background-color: #f4f4f4; /* A light gray background to distinguish the section */
+}
+
+.employee {
+    display: inline-block;
+    margin: 0 20px;
+    padding: 20px;
+}
+
+.employee img {
+    width: 150px;
+    height: 150px;
+    border-radius: 50%;
+    margin-bottom: 10px;
+}

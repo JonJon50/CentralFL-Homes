@@ -37,6 +37,53 @@
             </div>
         </div>
     </section>
+
+ <!-- Employee Section -->
+<section id="employees" class="employee-section">
+    <div class="container">
+        <!-- Top Row -->
+        <div class="employee-row">
+            <div class="employee">
+                <a href="https://www.linkedin.com/in/rosymessina/" target="_blank" rel="noopener noreferrer">
+                    <img src="{{ asset('images/employees/rm.jpeg') }}" alt="Rosy Messina">
+                    <p>Rosy Messina<br>VP Sales and Marketing, ICI Homes</p>
+                </a>
+            </div>
+            <div class="employee">
+                <a href="https://www.linkedin.com/in/scott-maclure-b179129/" target="_blank" rel="noopener noreferrer">
+                    <img src="{{ asset('images/employees/vpdb.jpeg') }}" alt="Scott MacLure">
+                    <p>Scott MacLure<br>ICI Homes- Daytona Beach</p>
+                </a>
+            </div>
+            <div class="employee">
+                <a href="https://www.linkedin.com/in/kim-newkirk-5372a634/" target="_blank" rel="noopener noreferrer">
+                    <img src="{{ asset('images/employees/kvp.jpeg') }}" alt="Kim Newkirk">
+                    <p>Kim Newkirk<br>Vice President at ICI Homes</p>
+                </a>
+            </div>
+        </div>
+        <!-- Bottom Row -->
+        <div class="employee-row">
+            <div class="employee">
+                <a href="https://www.linkedin.com/in/samuel-morrisett-88059a24/" target="_blank" rel="noopener noreferrer">
+                    <img src="{{ asset('images/employees/dp.jpeg') }}" alt="Samuel Morrisett">
+                    <p>Samuel Morrisett<br>Division President ICI Homes | Process Improvement, CRM</p>
+                </a>
+            </div>
+            <div class="contact-us">
+        <a href="https://icihomes.com/contact" target="_blank">Contact Us</a>
+            </div>
+            <div class="employee">
+                <a href="https://www.linkedin.com/in/mojibabazadeh/" target="_blank" rel="noopener noreferrer">
+                    <img src="{{ asset('images/employees/vp.jpeg') }}" alt="Moji Babazadeh">
+                    <p>Moji Babazadeh<br>Executive Vice President at ICI Homes</p>
+                </a>
+            </div>
+        </div>
+    </div>
+</section>
+
+
     <script src="https://cdn.jsdelivr.net/npm/alpinejs@2.8.2/dist/alpine.js" defer></script>
     <script src="{{ asset('js/app.js') }}"></script>
     <!-- Add more sections for the middle and bottom content -->
