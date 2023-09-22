@@ -44,7 +44,7 @@
  <!-- Employee Section -->
 <section id="employees" class="employee-section">
     <div class="container">
-        <!-- Top Row -->
+        <!-- Top Row Jon-->
         <div class="employee-row">
             <div class="employee">
                 <a href="https://www.linkedin.com/in/rosymessina/" target="_blank" rel="noopener noreferrer">
@@ -90,7 +90,7 @@
 <!-- Carousel Section -->
 <section id="carousel-section" class="carousel-section">
     <div class="container">
-        <h2 class="text-center">Some of ICI Homes work</h2>
+        <h2 class="text-center">ICI Custom Homes</h2>
         <div id="houseCarousel" class="carousel slide carousel-border" data-ride="carousel">
             <div class="carousel-inner">
                 <div class="carousel-item active">
@@ -119,10 +119,25 @@
             </a>
         </div>
         <p class="text-center mt-3 visit-us">
-            <a href="https://icihomes.com" target="_blank">Come Visit Us HERE</a>
+            <a href="https://icihomes.com" target="_blank">Visit us HERE</a>
         </p>
     </div>
 </section>
+
+<footer class="site-footer">
+  <div class="container">
+    <div class="footer-content">
+      <a href="https://github.com/your-username" target="_blank" rel="noopener noreferrer" aria-label="GitHub" class="social-icon">
+        <i class="fab fa-github"></i>
+      </a>
+      <p>© 2023 John Hagens. All Rights Reserved.</p>
+      <a href="https://linkedin.com/in/your-username" target="_blank" rel="noopener noreferrer" aria-label="LinkedIn" class="social-icon">
+        <i class="fab fa-linkedin-in"></i>
+      </a>
+    </div>
+  </div>
+</footer>
+
 
         <script src="{{ asset('js/app.js') }}"></script>
         <script defer src="https://cdn.jsdelivr.net/npm/alpinejs@3.13.0/dist/cdn.min.js"></script>
