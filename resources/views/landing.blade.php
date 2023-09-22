@@ -8,8 +8,6 @@
     <meta name="description" content="ICI Homes offers a range of real estate services, featuring profiles of our experienced employees and a collection of our high-quality homes available for sale.">
     <meta name="keywords" content="ICI Homes, Real Estate, Property, Quality Homes, Employee Profiles, Homes for Sale, Real Estate Services, Home Design">
     <title>ICI Homes Landing Page</title>
-   
-    
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
     <link href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css" rel="stylesheet">
     <link rel="stylesheet" href="{{ asset('css/app.css') }}"> 
@@ -141,10 +139,9 @@
 
 
         
-        <script defer src="https://cdn.jsdelivr.net/npm/alpinejs@3.13.0/dist/cdn.min.js"></script>
-
+        
        
-
+<script defer src="https://cdn.jsdelivr.net/npm/alpinejs@3.13.0/dist/cdn.min.js"></script>
 <script src="https://code.jquery.com/jquery-3.3.1.slim.min.js"></script>
 <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.7/umd/popper.min.js"></script>
 <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/js/bootstrap.min.js"></script>
