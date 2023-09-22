@@ -10,7 +10,6 @@
     <title>ICI Homes Landing Page</title>
     <link rel="stylesheet" href="{{ asset('css/app.css') }}"> 
     <link rel="stylesheet" href="{{ asset('build/assets/app-5a423f31.css') }}">
-    <link rel="stylesheet" href="{{ asset('dist/assets/app-5a423f31.css') }}">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
     <link href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css" rel="stylesheet">
 
