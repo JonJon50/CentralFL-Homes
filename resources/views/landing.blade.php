@@ -146,6 +146,7 @@
 <script src="https://code.jquery.com/jquery-3.3.1.slim.min.js"></script>
 <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.7/umd/popper.min.js"></script>
 <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/js/bootstrap.min.js"></script>
-<script src="{{ asset('js/app.js') }}"></script>  
+<script src="{{ app()->environment('local') ? asset('js/app.js') : secure_asset('js/app.js') }}"></script>
+ 
 </body>
 </html>
