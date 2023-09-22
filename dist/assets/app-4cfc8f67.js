@@ -1,0 +1,1 @@
+document.addEventListener("DOMContentLoaded",function(){const t=document.getElementById("text-fade").getElementsByTagName("span");let e=0;function n(){e<t.length&&(t[e].style.opacity=1,e++,setTimeout(n,500))}n()});
