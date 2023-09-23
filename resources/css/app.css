@@ -5,33 +5,34 @@ html {
     padding: 0;
 }
 
-
 .video-section {
     position: relative;
-    width: 100%;
-    height: 100vh;
     overflow: hidden;
 }
 
 video {
-    object-fit: cover;
     width: 100%;
-    height: 100%;
+    height: auto;
+    object-fit: cover; /* Cover entire viewport */
 }
-
 
 .text-overlay {
     position: absolute;
-    top: 0;
-    left: 0;
-    width: 100%;
-    height: 100%;
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    background: rgba(0, 0, 0, 0.5);
-   
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    text-align: center;
+    color: #FFF; /* Change according to your design */
+    z-index: 1;
 }
+
+/* Adjust font-size for responsive design */
+@media (max-width: 768px) {
+    .text-overlay span {
+        font-size: 3vw; /* or use em */
+    }
+}
+
 
 #text-fade {
     font-size: 36px;

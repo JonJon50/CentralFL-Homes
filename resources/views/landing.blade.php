@@ -19,7 +19,7 @@
             <source src="video/ICI Homes.mp4" type="video/mp4"> <!-- Replace with your video source -->
         </video>
         <div class="text-overlay">
-          <div id="text-fade" x-data="{ fadeIn: true, fontSize: '18px' }" x-cloak x-init="setTimeout(() => { fadeIn = false }, 15000); fontSize = window.innerWidth > 768 ? '24px' : '18px';"> <!-- Start with fadeIn true and then set it to false after 15000ms (15 seconds) -->
+        <div id="text-fade" x-data="{ fadeIn: true, fontSize: '3vw' }" x-cloak x-init="setTimeout(() => { fadeIn = false }, 15000); fontSize = window.innerWidth > 768 ? '3vw' : '18px';">
                 <span>Welcome to</span>
                 <span>ICI</span>
                 <span>Homes <i class="fas fa-home"></i></span>
