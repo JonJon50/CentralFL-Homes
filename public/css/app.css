@@ -33,6 +33,11 @@ video {
     }
 }
 
+#text-fade {
+    font-size: 36px;
+    color: #fff;
+    text-align: center;
+}
 
 .employee-section {
     text-align: center;
