@@ -71,7 +71,7 @@
                 <a href="https://www.linkedin.com/in/samuel-morrisett-88059a24/" target="_blank" rel="noopener noreferrer">
                 <img src="{{ asset('images/employees/dp.jpeg') }}" alt="Samuel Morrisett" loading="lazy">
 
-                    <p>Samuel Morrisett<br>Division President ICI Homes | Process Improvement, CRM</p>
+                    <p>Samuel Morrisett<br>Div. President ICI Homes Process Improvement</p>
                 </a>
             </div>
             <div class="contact-us">
