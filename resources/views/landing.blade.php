@@ -127,11 +127,11 @@
 <footer class="site-footer">
   <div class="container">
     <div class="footer-content">
-      <a href="https://github.com/your-username" target="_blank" rel="noopener noreferrer" aria-label="GitHub" class="social-icon">
+      <a href="https://github.com/JonJon50" target="_blank" rel="noopener noreferrer" aria-label="GitHub" class="social-icon">
         <i class="fab fa-github"></i>
       </a>
       <p>© 2023 John Hagens. All Rights Reserved.</p>
-      <a href="https://linkedin.com/in/your-username" target="_blank" rel="noopener noreferrer" aria-label="LinkedIn" class="social-icon">
+      <a href="https://www.linkedin.com/in/john-hagens-55b15212a/" target="_blank" rel="noopener noreferrer" aria-label="LinkedIn" class="social-icon">
         <i class="fab fa-linkedin-in"></i>
       </a>
     </div>
