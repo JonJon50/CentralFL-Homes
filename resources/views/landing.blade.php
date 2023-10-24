@@ -124,6 +124,16 @@
     </div>
 </section>
 
+<!-- Input field for current location -->
+<div class="container mt-3">
+    <label for="currentLocation">Enter your current location:</label>
+    <input type="text" id="currentLocation" placeholder="e.g., Your Address">
+    <button onclick="calculateRoute()">Get Directions</button>
+</div>
+
+<div id="map" style="height: 400px;"></div>
+
+<!-- Footer Section -->
 <footer class="site-footer">
   <div class="container">
     <div class="footer-content">
@@ -138,11 +148,53 @@
   </div>
 </footer>
 
+<script>
+        function initMap() {
+            const usaLatLng = { lat: 31.0000, lng: -87.5000 };
+
+
+            const map = new google.maps.Map(document.getElementById("map"), {
+                center: usaLatLng,
+                zoom: 5, // You can adjust the zoom level as needed
+            });
+
+            // Define the ICI Homes office locations and info
+            const iciHomesOffices = [
+                {
+                    name: "ICI Homes Office 1",
+                    location: { lat: 28.5383, lng: -81.3792 }, // Example office location in Orlando, FL
+                },
+                {
+                    name: "ICI Homes Office 2",
+                    location: { lat: 29.7604, lng: -95.3698 }, // Example office location in Houston, TX
+                },
+                // Add more office locations as needed
+            ];
+
+            const infowindow = new google.maps.InfoWindow();
+
+            iciHomesOffices.forEach((office) => {
+                const marker = new google.maps.Marker({
+                    position: office.location,
+                    map: map,
+                    title: office.name,
+                });
+
+                marker.addListener("click", () => {
+                    infowindow.setContent(office.name);
+                    infowindow.open(map, marker);
+                });
+            });
+        }
+    </script>
+
 <script defer src="https://cdn.jsdelivr.net/npm/alpinejs@3.13.0/dist/cdn.min.js"></script>
 <script src="https://code.jquery.com/jquery-3.3.1.slim.min.js"></script>
 <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.7/umd/popper.min.js"></script>
 <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/js/bootstrap.min.js"></script>
 <script src="{{ app()->environment('local') ? asset('js/app.js') : secure_asset('js/app.js') }}"></script>
- 
+<script src="https://maps.googleapis.com/maps/api/js?key=AIzaSyCU6NBGVDW5MYmWfvmRkJEwIHUJBfo-qLc&libraries=places&callback=initMap" defer></script>
+
+
 </body>
 </html>
