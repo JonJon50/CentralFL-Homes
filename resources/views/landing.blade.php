@@ -127,8 +127,8 @@
 <!-- Input field for current location -->
 <div class="container mt-3">
     <label for="currentLocation">Enter your current location:</label>
-    <input type="text" id="currentLocation" placeholder="e.g., Your Address">
-    <button onclick="calculateRoute()">Get Directions</button>
+    <input class="btn btn-outline-primary" type="text" id="currentLocation" placeholder="e.g., Your Address">
+    <button type="button" class="btn btn-outline-primary" onclick="calculateRoute()">Get Directions</button>
 </div>
 
 <div id="map" style="height: 400px;"></div>
@@ -148,15 +148,96 @@
   </div>
 </footer>
 
+
 <script>
+        // Define usaLatLng in the global scope
+        const usaLatLng = { lat: 31.0000, lng: -87.5000 };
+        let map;
+        let infowindow;
+
+        // Function to calculate and display directions
+        function calculateRoute() {
+            const directionsService = new google.maps.DirectionsService();
+            const directionsRenderer = new google.maps.DirectionsRenderer();
+
+            directionsRenderer.setPanel(document.getElementById("directionsPanel"));
+
+            // Initialize map
+            map = new google.maps.Map(document.getElementById("map"), {
+                center: usaLatLng,
+                zoom: 5,
+            });
+
+            directionsRenderer.setMap(map);
+
+            const currentLocation = document.getElementById("currentLocation").value;
+
+            // Use Geocoding to convert the user's input (current location) to coordinates
+            const geocoder = new google.maps.Geocoder();
+            geocoder.geocode({ address: currentLocation }, (results, status) => {
+                if (status === "OK" && results[0]) {
+                    const startLocation = results[0].geometry.location;
+
+                    const iciHomesOffices = [
+                        {
+                            name: "ICI Homes Office 1",
+                            location: { lat: 28.5383, lng: -81.3792 }, // Example office location in Orlando, FL
+                        },
+                        {
+                            name: "ICI Homes Office 2",
+                            location: { lat: 29.7604, lng: -95.3698 }, // Example office location in Houston, TX
+                        },
+                        // Add more office locations as needed
+                    ];
+
+                    const bounds = new google.maps.LatLngBounds();
+                    iciHomesOffices.forEach((office) => {
+                        const marker = new google.maps.Marker({
+                            position: office.location,
+                            map: map,
+                            title: office.name,
+                        });
+
+                        marker.addListener("click", () => {
+                            infowindow.setContent(office.name);
+                            infowindow.open(map, marker);
+                        });
+
+                        bounds.extend(office.location);
+                    });
+
+                    // Fit the map to the bounds of the office locations
+                    map.fitBounds(bounds);
+
+                    // Calculate and display directions
+                    const request = {
+                        origin: startLocation,
+                        destination: iciHomesOffices[0].location, // You can set the destination to the first ICI Homes office
+                        travelMode: google.maps.TravelMode.DRIVING,
+                    };
+
+                    directionsService.route(request, (result, status) => {
+                        if (status == "OK") {
+                            directionsRenderer.setDirections(result);
+                        } else {
+                            console.error("Error calculating directions:", status);
+                        }
+                    });
+                } else {
+                    console.error("Error geocoding user's location:", status);
+                }
+            });
+        }
+
         function initMap() {
-            const usaLatLng = { lat: 31.0000, lng: -87.5000 };
-
-
-            const map = new google.maps.Map(document.getElementById("map"), {
+            // Initialize map
+            map = new google.maps.Map(document.getElementById("map"), {
                 center: usaLatLng,
                 zoom: 5, // You can adjust the zoom level as needed
             });
+
+            // Initialize infowindow
+            infowindow = new google.maps.InfoWindow();
 
             // Define the ICI Homes office locations and info
             const iciHomesOffices = [
@@ -170,8 +251,6 @@
                 },
                 // Add more office locations as needed
             ];
-
-            const infowindow = new google.maps.InfoWindow();
 
             iciHomesOffices.forEach((office) => {
                 const marker = new google.maps.Marker({
@@ -194,7 +273,5 @@
 <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/js/bootstrap.min.js"></script>
 <script src="{{ app()->environment('local') ? asset('js/app.js') : secure_asset('js/app.js') }}"></script>
 <script src="https://maps.googleapis.com/maps/api/js?key=AIzaSyCU6NBGVDW5MYmWfvmRkJEwIHUJBfo-qLc&libraries=places&callback=initMap" defer></script>
-
-
 </body>
 </html>
