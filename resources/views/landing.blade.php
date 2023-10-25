@@ -11,7 +11,16 @@
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
     <link href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css" rel="stylesheet">
     <link rel="stylesheet" href="{{ app()->isLocal() ? asset('css/app.css') : secure_asset('css/app.css') }}" />
-
+    <style>
+        /* Add your custom styles here */
+        /* Responsive styles for smaller screens */
+        @media (max-width: 576px) {
+            .container {
+                padding-left: 15px;
+                padding-right: 15px;
+            }
+        }
+    </style>
 </head>
 <body>
     <section class="video-section">
@@ -124,25 +133,185 @@
     </div>
 </section>
 
-<footer class="site-footer">
-  <div class="container">
-    <div class="footer-content">
-      <a href="https://github.com/JonJon50" target="_blank" rel="noopener noreferrer" aria-label="GitHub" class="social-icon">
-        <i class="fab fa-github"></i>
-      </a>
-      <p>© 2023 John Hagens. All Rights Reserved.</p>
-      <a href="https://www.linkedin.com/in/john-hagens-55b15212a/" target="_blank" rel="noopener noreferrer" aria-label="LinkedIn" class="social-icon">
-        <i class="fab fa-linkedin-in"></i>
-      </a>
+
+<div class="container mt-3">
+        <h2 class="text-center">ICI Homes, Offices</h2>
+        <ul id="officeList">
+            <!-- Office information will be dynamically added here -->
+        </ul>
     </div>
-  </div>
-</footer>
+
+    <div class="container mt-3">
+        <div class="row">
+            <div class="col-md-4">
+                <label for="officeSelect">Select an office:</label>
+                <select class="form-control" id="officeSelect">
+                    <option value="0">Location</option>
+                    <option value="0">Daytona Beach Office</option>
+                    <option value="1">Houston Office</option>
+                    <!-- Add more options for additional offices as needed -->
+                </select>
+            </div>
+        </div>
+    </div>
+
+    <div class="container mt-3">
+        <div class="row">
+            <div class="col-md-4">
+                <label for="currentLocation">Current location:</label>
+                <div class="input-group">
+                    <input class="form-control" type="text" id="currentLocation" placeholder="e.g., Your Address">
+                    <div class="input-group-append">
+                        <button type="button" class="btn btn-primary" onclick="calculateRouteAndStoreInput()">Get Directions</button>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <div id="map" style="height: 400px;"></div>
+
+    <div id="directionsPanel" class="container mt-3"></div>
+
+    <footer class="site-footer">
+        <div class="container">
+            <div class="footer-content text-center">
+                <a href="https://github.com/JonJon50" target="_blank" rel="noopener noreferrer" aria-label="GitHub" class="social-icon">
+                    <i class="fab fa-github"></i>
+                </a>
+                <p>© 2023 John Hagens. All Rights Reserved.</p>
+                <a href="https://www.linkedin.com/in/john-hagens-55b15212a/" target="_blank" rel="noopener noreferrer" aria-label="LinkedIn" class="social-icon">
+                    <i class="fab fa-linkedin-in"></i>
+                </a>
+            </div>
+        </div>
+    </footer>
+
+<script>
+    // Define usaLatLng in the global scope
+    const usaLatLng = { lat: 31.0000, lng: -87.5000 };
+    let map;
+    let infowindow;
+    let directionsRenderer;
+
+    // Function to calculate and display directions and store input value
+    function calculateRouteAndStoreInput() {
+        const directionsService = new google.maps.DirectionsService();
+
+        // Clear previous directions from the directions panel
+        document.getElementById("directionsPanel").innerHTML = '';
+
+        directionsRenderer.setPanel(document.getElementById("directionsPanel"));
+
+        const currentLocation = document.getElementById("currentLocation").value;
+
+        // Use Geocoding to convert the user's input (current location) to coordinates
+        const geocoder = new google.maps.Geocoder();
+        geocoder.geocode({ address: currentLocation }, (results, status) => {
+            if (status === "OK" && results[0]) {
+                const startLocation = results[0].geometry.location;
+
+                const iciHomesOffices = [
+                    {
+                        name: "Florida Office",
+                        location: { lat: 28.5383, lng: -81.3792 }, // Example office location in Orlando, FL
+                    },
+                    {
+                        name: "Texas Office",
+                        location: { lat: 29.7604, lng: -95.3698 }, // Example office location in Houston, TX
+                    },
+                    // Add more office locations as needed
+                ];
+
+                const selectedOfficeIndex = document.getElementById("officeSelect").value;
+                const selectedOffice = iciHomesOffices[selectedOfficeIndex];
+
+                const request = {
+                    origin: startLocation,
+                    destination: selectedOffice.location,
+                    travelMode: google.maps.TravelMode.DRIVING,
+                };
+
+                directionsService.route(request, (result, status) => {
+                    if (status === "OK") {
+                        directionsRenderer.setDirections(result);
+                        displayOfficeInformation(selectedOffice); // Display the selected office information
+                    } else {
+                        console.error("Error calculating directions:", status);
+                    }
+                });
+
+                // Store the input value in local storage
+                localStorage.setItem("currentLocation", currentLocation);
+
+                // Clear the input field
+                document.getElementById("currentLocation").value = "";
+            } else {
+                console.error("Error geocoding user's location:", status);
+            }
+        });
+    }
+
+    function initMap() {
+        // Initialize map
+        map = new google.maps.Map(document.getElementById("map"), {
+            center: usaLatLng,
+            zoom: 5, // You can adjust the zoom level as needed
+        });
+
+        // Initialize infowindow
+        infowindow = new google.maps.InfoWindow();
+
+        // Initialize directions renderer
+        directionsRenderer = new google.maps.DirectionsRenderer();
+        directionsRenderer.setMap(map);
+
+        // Define the ICI Homes office locations and info
+        const iciHomesOffices = [
+            {
+                name: "ICI Homes Daytona Beach Office",
+                location: { lat: 28.5383, lng: -81.3792 }, // Example office location in Orlando, FL
+            },
+            {
+                name: "ICI Homes Houston Office",
+                location: { lat: 29.7604, lng: -95.3698 }, // Example office location in Houston, TX
+            },
+            // Add more office locations as needed
+        ];
+
+        iciHomesOffices.forEach((office) => {
+            const marker = new google.maps.Marker({
+                position: office.location,
+                map: map,
+                title: office.name,
+            });
+
+            marker.addListener("click", () => {
+                infowindow.setContent(office.name);
+                infowindow.open(map, marker);
+            });
+        });
+    }
+
+    // Function to display office information
+    function displayOfficeInformation(office) {
+        const officeList = document.getElementById("officeList");
+        const listItem = document.createElement("li");
+        listItem.textContent = `Selected Office: ${office.name}`;
+        officeList.innerHTML = ''; // Clear previous office information
+        officeList.appendChild(listItem);
+    }
+</script>
+
+
+
 
 <script defer src="https://cdn.jsdelivr.net/npm/alpinejs@3.13.0/dist/cdn.min.js"></script>
 <script src="https://code.jquery.com/jquery-3.3.1.slim.min.js"></script>
 <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.7/umd/popper.min.js"></script>
 <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/js/bootstrap.min.js"></script>
 <script src="{{ app()->environment('local') ? asset('js/app.js') : secure_asset('js/app.js') }}"></script>
- 
+<script src="https://maps.googleapis.com/maps/api/js?key=AIzaSyCU6NBGVDW5MYmWfvmRkJEwIHUJBfo-qLc&libraries=places&callback=initMap" defer></script>
+<script src="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js"></script>
 </body>
 </html>
