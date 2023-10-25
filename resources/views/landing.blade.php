@@ -11,19 +11,14 @@
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
     <link href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css" rel="stylesheet">
     <link rel="stylesheet" href="{{ app()->isLocal() ? asset('css/app.css') : secure_asset('css/app.css') }}" />
-    <style>
-        /* Add your custom styles here */
-        /* Responsive styles for smaller screens */
-        @media (max-width: 576px) {
-            .container {
-                padding-left: 15px;
-                padding-right: 15px;
-            }
-        }
-    </style>
+  
 </head>
 <body>
-    <section class="video-section">
+<script>
+    // Define a JavaScript variable with your Google Maps API key
+    var apiKey = @json(config('services.google_maps.key'));
+</script>
+ <section class="video-section">
         <video autoplay muted loop>
             <source src="video/ICI Homes.mp4" type="video/mp4"> <!-- Replace with your video source -->
         </video>
@@ -188,7 +183,7 @@
     </footer>
 
 <script>
-    // Define usaLatLng in the global scope
+ // Define usaLatLng in the global scope
     const usaLatLng = { lat: 31.0000, lng: -87.5000 };
     let map;
     let infowindow;
@@ -312,7 +307,7 @@
 <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/js/bootstrap.min.js"></script>
 <script src="{{ app()->environment('local') ? asset('js/app.js') : secure_asset('js/app.js') }}"></script>
 <!-- i will do a process.env api key Environment Variable  -->
-<script src="https://maps.googleapis.com/maps/api/js?key=AIzaSyCU6NBGVDW5MYmWfvmRkJEwIHUJBfo-qLc&libraries=places&callback=initMap" defer></script>
+<script src="https://maps.googleapis.com/maps/api/js?key={{ config('services.google_maps.key') }}&callback=initMap&libraries=&v=weekly" defer></script>
 <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js"></script>
 </body>
 </html>

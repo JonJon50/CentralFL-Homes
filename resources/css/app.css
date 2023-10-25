@@ -185,3 +185,12 @@ video {
     width: 24px;
     height: 24px;
 }
+
+ 
+        /* Responsive styles for smaller screens */
+        @media (max-width: 576px) {
+            .container {
+                padding-left: 15px;
+                padding-right: 15px;
+            }
+        }
