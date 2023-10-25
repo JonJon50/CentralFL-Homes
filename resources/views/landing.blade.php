@@ -11,7 +11,16 @@
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
     <link href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css" rel="stylesheet">
     <link rel="stylesheet" href="{{ app()->isLocal() ? asset('css/app.css') : secure_asset('css/app.css') }}" />
-
+    <style>
+        /* Add your custom styles here */
+        /* Responsive styles for smaller screens */
+        @media (max-width: 576px) {
+            .container {
+                padding-left: 15px;
+                padding-right: 15px;
+            }
+        }
+    </style>
 </head>
 <body>
     <section class="video-section">
@@ -124,50 +133,59 @@
     </div>
 </section>
 
-<!-- Input field for current location -->
-<div class="container mt-3">
-    <label for="currentLocation">Enter your current location:</label>
-    <input class="btn btn-outline-primary" type="text" id="currentLocation" placeholder="e.g., Your Address">
-    <button type="button" class="btn btn-outline-primary" onclick="calculateRouteAndClearInput()">Get Directions</button>
-</div>
-
-<!-- Dropdown list to select the office for directions -->
-<div class="container mt-3">
-    <label for="officeSelect">Select an office:</label>
-    <select class="btn btn-outline-primary" id="officeSelect">
-        <option value="0">Location</option>
-        <option value="0">Daytona Beach Office</option>
-        <option value="1">Houston Office</option>
-        <!-- Add more options for additional offices as needed -->
-    </select>
-</div>
 
 <div class="container mt-3">
-    <h2>ICI Homes, Offices</h2>
-    <ul id="officeList">
-        <!-- Office information will be dynamically added here -->
-    </ul>
-</div>
-
-<div id="map" style="height: 400px;"></div>
-
-<!-- Directions panel to display written directions -->
-<div id="directionsPanel" class="container mt-3"></div>
-
-<!-- Footer Section -->
-<footer class="site-footer">
-  <div class="container">
-    <div class="footer-content">
-      <a href="https://github.com/JonJon50" target="_blank" rel="noopener noreferrer" aria-label="GitHub" class="social-icon">
-        <i class="fab fa-github"></i>
-      </a>
-      <p>© 2023 John Hagens. All Rights Reserved.</p>
-      <a href="https://www.linkedin.com/in/john-hagens-55b15212a/" target="_blank" rel="noopener noreferrer" aria-label="LinkedIn" class="social-icon">
-        <i class="fab fa-linkedin-in"></i>
-      </a>
+        <h2 class="text-center">ICI Homes, Offices</h2>
+        <ul id="officeList">
+            <!-- Office information will be dynamically added here -->
+        </ul>
     </div>
-  </div>
-</footer>
+
+    <div class="container mt-3">
+        <div class="row">
+            <div class="col-md-4">
+                <label for="officeSelect">Select an office:</label>
+                <select class="form-control" id="officeSelect">
+                    <option value="0">Location</option>
+                    <option value="0">Daytona Beach Office</option>
+                    <option value="1">Houston Office</option>
+                    <!-- Add more options for additional offices as needed -->
+                </select>
+            </div>
+        </div>
+    </div>
+
+    <div class="container mt-3">
+        <div class="row">
+            <div class="col-md-4">
+                <label for="currentLocation">Current location:</label>
+                <div class="input-group">
+                    <input class="form-control" type="text" id="currentLocation" placeholder="e.g., Your Address">
+                    <div class="input-group-append">
+                        <button type="button" class="btn btn-primary" onclick="calculateRouteAndStoreInput()">Get Directions</button>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <div id="map" style="height: 400px;"></div>
+
+    <div id="directionsPanel" class="container mt-3"></div>
+
+    <footer class="site-footer">
+        <div class="container">
+            <div class="footer-content text-center">
+                <a href="https://github.com/JonJon50" target="_blank" rel="noopener noreferrer" aria-label="GitHub" class="social-icon">
+                    <i class="fab fa-github"></i>
+                </a>
+                <p>© 2023 John Hagens. All Rights Reserved.</p>
+                <a href="https://www.linkedin.com/in/john-hagens-55b15212a/" target="_blank" rel="noopener noreferrer" aria-label="LinkedIn" class="social-icon">
+                    <i class="fab fa-linkedin-in"></i>
+                </a>
+            </div>
+        </div>
+    </footer>
 
 <script>
     // Define usaLatLng in the global scope
@@ -176,8 +194,8 @@
     let infowindow;
     let directionsRenderer;
 
-    // Function to calculate and display directions
-    function calculateRoute() {
+    // Function to calculate and display directions and store input value
+    function calculateRouteAndStoreInput() {
         const directionsService = new google.maps.DirectionsService();
 
         // Clear previous directions from the directions panel
@@ -223,17 +241,15 @@
                     }
                 });
 
+                // Store the input value in local storage
+                localStorage.setItem("currentLocation", currentLocation);
+
                 // Clear the input field
                 document.getElementById("currentLocation").value = "";
             } else {
                 console.error("Error geocoding user's location:", status);
             }
         });
-    }
-
-    function calculateRouteAndClearInput() {
-        // Call the original calculateRoute function
-        calculateRoute();
     }
 
     function initMap() {
@@ -296,5 +312,6 @@
 <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/js/bootstrap.min.js"></script>
 <script src="{{ app()->environment('local') ? asset('js/app.js') : secure_asset('js/app.js') }}"></script>
 <script src="https://maps.googleapis.com/maps/api/js?key=AIzaSyCU6NBGVDW5MYmWfvmRkJEwIHUJBfo-qLc&libraries=places&callback=initMap" defer></script>
+<script src="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js"></script>
 </body>
 </html>
