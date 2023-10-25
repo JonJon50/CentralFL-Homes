@@ -186,7 +186,7 @@ video {
     height: 24px;
 }
 
-  /* Add your custom styles here */
+ 
         /* Responsive styles for smaller screens */
         @media (max-width: 576px) {
             .container {
