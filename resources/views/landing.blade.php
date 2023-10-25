@@ -14,10 +14,7 @@
   
 </head>
 <body>
-<script>
-    // Define a JavaScript variable with your Google Maps API key
-    var apiKey = @json(config('services.google_maps.key'));
-</script>
+
  <section class="video-section">
         <video autoplay muted loop>
             <source src="video/ICI Homes.mp4" type="video/mp4"> <!-- Replace with your video source -->
