@@ -128,10 +128,31 @@
 <div class="container mt-3">
     <label for="currentLocation">Enter your current location:</label>
     <input class="btn btn-outline-primary" type="text" id="currentLocation" placeholder="e.g., Your Address">
-    <button type="button" class="btn btn-outline-primary" onclick="calculateRoute()">Get Directions</button>
+    <button type="button" class="btn btn-outline-primary" onclick="calculateRouteAndClearInput()">Get Directions</button>
+</div>
+
+<!-- Dropdown list to select the office for directions -->
+<div class="container mt-3">
+    <label for="officeSelect">Select an office:</label>
+    <select class="btn btn-outline-primary" id="officeSelect">
+        <option value="0">Location</option>
+        <option value="0">Daytona Beach Office</option>
+        <option value="1">Houston Office</option>
+        <!-- Add more options for additional offices as needed -->
+    </select>
+</div>
+
+<div class="container mt-3">
+    <h2>ICI Homes, Offices</h2>
+    <ul id="officeList">
+        <!-- Office information will be dynamically added here -->
+    </ul>
 </div>
 
 <div id="map" style="height: 400px;"></div>
+
+<!-- Directions panel to display written directions -->
+<div id="directionsPanel" class="container mt-3"></div>
 
 <!-- Footer Section -->
 <footer class="site-footer">
@@ -148,124 +169,126 @@
   </div>
 </footer>
 
-
 <script>
-        // Define usaLatLng in the global scope
-        const usaLatLng = { lat: 31.0000, lng: -87.5000 };
-        let map;
-        let infowindow;
+    // Define usaLatLng in the global scope
+    const usaLatLng = { lat: 31.0000, lng: -87.5000 };
+    let map;
+    let infowindow;
+    let directionsRenderer;
 
-        // Function to calculate and display directions
-        function calculateRoute() {
-            const directionsService = new google.maps.DirectionsService();
-            const directionsRenderer = new google.maps.DirectionsRenderer();
+    // Function to calculate and display directions
+    function calculateRoute() {
+        const directionsService = new google.maps.DirectionsService();
 
-            directionsRenderer.setPanel(document.getElementById("directionsPanel"));
+        // Clear previous directions from the directions panel
+        document.getElementById("directionsPanel").innerHTML = '';
 
-            // Initialize map
-            map = new google.maps.Map(document.getElementById("map"), {
-                center: usaLatLng,
-                zoom: 5,
-            });
+        directionsRenderer.setPanel(document.getElementById("directionsPanel"));
 
-            directionsRenderer.setMap(map);
+        const currentLocation = document.getElementById("currentLocation").value;
 
-            const currentLocation = document.getElementById("currentLocation").value;
+        // Use Geocoding to convert the user's input (current location) to coordinates
+        const geocoder = new google.maps.Geocoder();
+        geocoder.geocode({ address: currentLocation }, (results, status) => {
+            if (status === "OK" && results[0]) {
+                const startLocation = results[0].geometry.location;
 
-            // Use Geocoding to convert the user's input (current location) to coordinates
-            const geocoder = new google.maps.Geocoder();
-            geocoder.geocode({ address: currentLocation }, (results, status) => {
-                if (status === "OK" && results[0]) {
-                    const startLocation = results[0].geometry.location;
+                const iciHomesOffices = [
+                    {
+                        name: "Florida Office",
+                        location: { lat: 28.5383, lng: -81.3792 }, // Example office location in Orlando, FL
+                    },
+                    {
+                        name: "Texas Office",
+                        location: { lat: 29.7604, lng: -95.3698 }, // Example office location in Houston, TX
+                    },
+                    // Add more office locations as needed
+                ];
 
-                    const iciHomesOffices = [
-                        {
-                            name: "ICI Homes Office 1",
-                            location: { lat: 28.5383, lng: -81.3792 }, // Example office location in Orlando, FL
-                        },
-                        {
-                            name: "ICI Homes Office 2",
-                            location: { lat: 29.7604, lng: -95.3698 }, // Example office location in Houston, TX
-                        },
-                        // Add more office locations as needed
-                    ];
+                const selectedOfficeIndex = document.getElementById("officeSelect").value;
+                const selectedOffice = iciHomesOffices[selectedOfficeIndex];
 
-                    const bounds = new google.maps.LatLngBounds();
-                    iciHomesOffices.forEach((office) => {
-                        const marker = new google.maps.Marker({
-                            position: office.location,
-                            map: map,
-                            title: office.name,
-                        });
+                const request = {
+                    origin: startLocation,
+                    destination: selectedOffice.location,
+                    travelMode: google.maps.TravelMode.DRIVING,
+                };
 
-                        marker.addListener("click", () => {
-                            infowindow.setContent(office.name);
-                            infowindow.open(map, marker);
-                        });
-
-                        bounds.extend(office.location);
-                    });
-
-                    // Fit the map to the bounds of the office locations
-                    map.fitBounds(bounds);
-
-                    // Calculate and display directions
-                    const request = {
-                        origin: startLocation,
-                        destination: iciHomesOffices[0].location, // You can set the destination to the first ICI Homes office
-                        travelMode: google.maps.TravelMode.DRIVING,
-                    };
-
-                    directionsService.route(request, (result, status) => {
-                        if (status == "OK") {
-                            directionsRenderer.setDirections(result);
-                        } else {
-                            console.error("Error calculating directions:", status);
-                        }
-                    });
-                } else {
-                    console.error("Error geocoding user's location:", status);
-                }
-            });
-        }
-
-        function initMap() {
-            // Initialize map
-            map = new google.maps.Map(document.getElementById("map"), {
-                center: usaLatLng,
-                zoom: 5, // You can adjust the zoom level as needed
-            });
-
-            // Initialize infowindow
-            infowindow = new google.maps.InfoWindow();
-
-            // Define the ICI Homes office locations and info
-            const iciHomesOffices = [
-                {
-                    name: "ICI Homes Office 1",
-                    location: { lat: 28.5383, lng: -81.3792 }, // Example office location in Orlando, FL
-                },
-                {
-                    name: "ICI Homes Office 2",
-                    location: { lat: 29.7604, lng: -95.3698 }, // Example office location in Houston, TX
-                },
-                // Add more office locations as needed
-            ];
-
-            iciHomesOffices.forEach((office) => {
-                const marker = new google.maps.Marker({
-                    position: office.location,
-                    map: map,
-                    title: office.name,
+                directionsService.route(request, (result, status) => {
+                    if (status === "OK") {
+                        directionsRenderer.setDirections(result);
+                        displayOfficeInformation(selectedOffice); // Display the selected office information
+                    } else {
+                        console.error("Error calculating directions:", status);
+                    }
                 });
 
-                marker.addListener("click", () => {
-                    infowindow.setContent(office.name);
-                    infowindow.open(map, marker);
-                });
+                // Clear the input field
+                document.getElementById("currentLocation").value = "";
+            } else {
+                console.error("Error geocoding user's location:", status);
+            }
+        });
+    }
+
+    function calculateRouteAndClearInput() {
+        // Call the original calculateRoute function
+        calculateRoute();
+    }
+
+    function initMap() {
+        // Initialize map
+        map = new google.maps.Map(document.getElementById("map"), {
+            center: usaLatLng,
+            zoom: 5, // You can adjust the zoom level as needed
+        });
+
+        // Initialize infowindow
+        infowindow = new google.maps.InfoWindow();
+
+        // Initialize directions renderer
+        directionsRenderer = new google.maps.DirectionsRenderer();
+        directionsRenderer.setMap(map);
+
+        // Define the ICI Homes office locations and info
+        const iciHomesOffices = [
+            {
+                name: "ICI Homes Daytona Beach Office",
+                location: { lat: 28.5383, lng: -81.3792 }, // Example office location in Orlando, FL
+            },
+            {
+                name: "ICI Homes Houston Office",
+                location: { lat: 29.7604, lng: -95.3698 }, // Example office location in Houston, TX
+            },
+            // Add more office locations as needed
+        ];
+
+        iciHomesOffices.forEach((office) => {
+            const marker = new google.maps.Marker({
+                position: office.location,
+                map: map,
+                title: office.name,
             });
-        }
-    </script>
+
+            marker.addListener("click", () => {
+                infowindow.setContent(office.name);
+                infowindow.open(map, marker);
+            });
+        });
+    }
+
+    // Function to display office information
+    function displayOfficeInformation(office) {
+        const officeList = document.getElementById("officeList");
+        const listItem = document.createElement("li");
+        listItem.textContent = `Selected Office: ${office.name}`;
+        officeList.innerHTML = ''; // Clear previous office information
+        officeList.appendChild(listItem);
+    }
+</script>
+
+
+
 
 <script defer src="https://cdn.jsdelivr.net/npm/alpinejs@3.13.0/dist/cdn.min.js"></script>
 <script src="https://code.jquery.com/jquery-3.3.1.slim.min.js"></script>
