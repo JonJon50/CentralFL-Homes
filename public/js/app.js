@@ -89,7 +89,7 @@ function initMap() {
         center: usaLatLng,
         zoom: 5, // You can adjust the zoom level as needed
     });
-
+    
     // Initialize infowindow
     infowindow = new google.maps.InfoWindow();
 
@@ -133,3 +133,4 @@ function displayOfficeInformation(office) {
     officeList.appendChild(listItem);
 }
 
+initMap(); // Initialize the map

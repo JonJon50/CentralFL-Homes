@@ -133,3 +133,4 @@ function displayOfficeInformation(office) {
     officeList.appendChild(listItem);
 }
 
+initMap(); // Initialize the map
