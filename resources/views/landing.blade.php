@@ -16,9 +16,9 @@
 <body>
 
  <section class="video-section">
-        <video autoplay muted loop>
-            <source src="video/ICI Homes.mp4" type="video/mp4"> <!-- Replace with your video source -->
-        </video>
+ <video autoplay muted loop>
+    <source src="{{ asset('video/ICI Homes.mp4') }}" type="video/mp4">
+</video>
         <div class="text-overlay">
         <div id="text-fade" x-data="{ fadeIn: true, fontSize: '3vw' }" x-cloak x-init="setTimeout(() => { fadeIn = false }, 15000); fontSize = window.innerWidth > 768 ? '3vw' : '18px';">
                 <span>Welcome to</span>

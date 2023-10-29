@@ -6,7 +6,7 @@ document.addEventListener('DOMContentLoaded', function() {
     const textFade = document.getElementById('text-fade');
     const words = textFade.getElementsByTagName('span');
 
-    let index = 0;
+    let index = 0
 
     function fadeInWord() {
         if (index < words.length) {
